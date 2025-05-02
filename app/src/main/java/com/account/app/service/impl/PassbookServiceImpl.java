@@ -9,6 +9,8 @@ import com.account.app.service.PassbookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class PassbookServiceImpl implements PassbookService {
 
@@ -36,6 +38,9 @@ public class PassbookServiceImpl implements PassbookService {
     @Override
     public PassbookDto downloadFileByAccountId(Long accountId) {
         PassbookFile passbookFile = passbookRepository.findByAccountId(accountId);
-        return PassbookMapper.mapToPassbookDto(passbookFile);
+        if(Objects.nonNull(passbookFile))
+            return PassbookMapper.mapToPassbookDto(passbookFile);
+        else
+            return null;
     }
 }
