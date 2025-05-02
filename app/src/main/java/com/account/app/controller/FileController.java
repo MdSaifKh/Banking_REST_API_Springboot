@@ -35,7 +35,7 @@ public class FileController {
     public ResponseEntity<byte[]> downloadFile(@PathVariable("accountId") Long accountId){
         PassbookDto passbookDto = passbookService.downloadFileByAccountId(accountId);
         if(passbookDto == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found with given id !!".getBytes());
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
